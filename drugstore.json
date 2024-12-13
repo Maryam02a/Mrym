@@ -1,0 +1,56 @@
+{
+    "id":"1",
+    "Name":"Bisoprolol",
+    "useingFor":"heartach",
+    "Form":"tablet",
+    "Description":"in three doses:2.5,5,10",
+    "price":15.5
+},
+{
+    "id":"2",
+    "Name":"Serum Dextros5%",
+    "useingFor":"for sick and cold",
+    "Description":"for injection and it has 0.5litr and 1 litr",
+    "form":"injection",
+    "price":30.5
+},
+{
+    "id":"3",
+    "Name":"Alprazolam",
+    "useingFor":"soothing and sleapy",
+    "Description":"in tow doses:1,0.5",
+    "Form":"tablet",
+    "price":18.5
+},
+{
+    "id":"4",
+    "Name":"Diclofenac",
+    "useingFor":"backache and body pain",
+    "Description":"in three doses:25,50,100",
+    "Form":"tablet & supp & ampoule",
+    "price":10.5
+},
+{
+    "id":"5",
+    "Name":"Mefnamic acid",
+    "useingFor":"thoothache and pain",
+    "Description0":"",
+    "form":"tablet",
+    "price":12.5
+},
+{
+    "id":"6",
+    "Name":"Dextrometorphan",
+    "useingFor":"sore throat",
+    "Description":"dose:15",
+    "form":"syrup & tablet",
+    "price":20.5
+},
+{
+    "id":"7",
+    "Name":"Famotidin",
+    "useingFor":"stomachache",
+    "Description":"in tow doses:40,20",
+    "form":"syrup & ampoule & tablet",
+    "price":20.5
+},
