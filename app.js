@@ -10,7 +10,7 @@ const customers = [
 const cars = [
     {id:1, name:"Volester", color:"Yellow"},
     {id:2, name:"Hionda Kope", color:"Red"},
-    {id:3, name:"Tigo-7", color:"Brown"},
+    {id:3, name:"Tigo-7pro", color:"Brown"},
     {id:4, name:"peju-206", color:"Purple"},
 ]
 app.get("/",(req, res) => {
