@@ -11,6 +11,17 @@ html (lang="en")
             section 
                 h2.hotPink #{section}
                 p.springGreen its site
+                table (bordar='1')
+                     each user in users 
+                       tr 
+                           td #{user.id}
+                           td #{user.age}
+                           td #{user.name}
+                each num in ["Maryam" , "Mobina", "Morteza", "Ali", "Raziyeh"]
+                    ol 
+                        li=num 
+                each Value,key in {a:1, b:2}
+                    li #{key} : #{Value}
             footer 
                 h3.hotpink footer  of my web app 
                 p 
