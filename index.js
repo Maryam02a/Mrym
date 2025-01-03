@@ -1,113 +1,115 @@
-const express = require("express");
-const { ErrHandller, NotFoundErr } = require("./util/ErrorHandller");
-const { BlogModel } = require("./model/blog.model");
+const express = require ("express");
+const { notFoundError,ErrorHlerr } = require("./Util/ErrHandller");
+const { Textmodel } = require("./Model/text.model");
 const { isValidObjectId } = require("mongoose");
 const omitEmpty = require("omit-empty");
 const app = express();
-require("./config/mongo.config");
+require("./config/mongoose.config");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended:true }));
 
-app.get("/",(req, res , next) => {
-    res.send("main page")
+
+app.get("/main", (req, res , next) => {
+    res.send("Home page")
 })
 
-
-app.post("/create", async(req, res , next) => {
-    try{
-        const{ title, text } = req.body;
-        const newBlog = new BlogModel({
+app.post("/main/create", async (req, res , next) => {
+    try {
+        const { title,text } = req.body;
+        const newText = new Textmodel({
             title,
             text
-        })
-        await newBlog.save()
-        res.send(newBlog)
-    } catch (error){
+        }) 
+        await newText.save();
+        res.send(newText)
+    } catch (error) {
         next(error)
     }
 })
 
 
-app.get("/insert-many", async(req, res , next) => {
-    try{
-        const  newBlog = await BlogModel.insertMany([
+app.post("/main/createmany",  async(req, res , next) =>{
+    try {
+        const newText = await Textmodel.insertMany([
             {
-                title:"My God",
-                text:"if you break heart someone God answer the bad work of them"
+                title:"break",
+                text:"break the heart of someone is the worste work of the world"
             },
             {
-                title:"cring",
-                text:"crying"
+                title:"all of me",
+                text:"always someone who is all of you who break heart you awful"
             }
         ])
-        res.send(newBlog)
-    }catch(error) {
-        next(error)
-    }
-})
-
-app.get("/find", async(req, res , next) => {
-    try {
-        const newBlog = await BlogModel.find();
-        res.send({
-            statusCode:200,
-            document:newBlog.length,
-            newBlog
-        })
+        res.send(newText)
     } catch (error) {
         next(error)
     }
 })
 
+app.get("/main/find", async(req, res , next) => {
+   try {
+    const newText = await Textmodel.find();
+    res.send({
+        statusCode:200,
+        document:express.text.length,
+        newText
+    })
+   } catch (error) {
+     next(error)
+   }
+})
 
-app.get("/finds/:id", async(req , res , next) => {
+app.get("/main/find/:id", async(req, res , next) => {
     try {
         const { id } = req.params;
-        if(!isValidObjectId(id)) throw { statusCode:400, message:"Id is not invalid"}
-        const newBlog = await BlogModel.findOne({ _id:id });
-        res.send(newBlog)
+        if(!isValidObjectId(id)) throw {statusCode:400 , message:"id is not valid"}
+        const newText = await Textmodel.findOne({_id:id});
+        res.send(newText)
     } catch (error) {
         next(error)
     }
 })
 
-app.delete("/blogs/:id", async(req, res , next) => {
+app.delete("/main/delete/:id", async(req, res , next) => {
     try {
         const { id } = req.params;
-        if(!isValidObjectId(id)) throw {statusCode:400 , message:"Id is not valid"}
-        const result = await BlogModel.deleteOne({_id:id});
+        if(!isValidObjectId(id)) throw {statusCode:400, message:"id is not valid"}
+        const result = await Textmodel.deleteOne({_id:id});
         res.send(result)
     } catch (error) {
         next(error)
     }
 })
 
-app.delete("/blogs", async(req, res ,next) => {
+app.delete("/main/delete", async(req, res , next) => {
     try {
-        const result = await BlogModel.deleteMany({});
+        const result = await Textmodel.deleteMany({});
         res.send(result)
     } catch (error) {
         next(error)
     }
 })
 
-app.put("/blogs/:id", async(req, res, next) => {
+app.put("/main/updatetext/:id" , async(req, res , next) => {
     try {
         const { id } = req.params;
-        const newBlogObject= omitEmpty(req.body);
-        const blog = await BlogModel.findOne({_id:id});
-        if(!blog) throw {statusCode:400, message:"not found blog"}
-        Object.assign(blog,newBlogObject)
-        await blog.save();
-        res.send(blog)
+        const newTextObject = omitEmpty(req.body);
+        const Text = await Textmodel.findOne({_id:id});
+        if(!Text) throw {statusCode:400 , message:"text not found"}
+        Object.assign(Text, newTextObject),
+        await Text.save();
+        res.send(Text)
     } catch (error) {
         next(error)
     }
 })
-app.use(ErrHandller);
-app.use(NotFoundErr);
-app.listen(5000 , () => {
-    console.log("http://localhost:5000");
+
+
+app.use(notFoundError)
+app.use(ErrorHlerr)
+
+app.listen(5000, () => {
+    console.log("server is running on port 4000 > http://localhost:5000");
     
 })
